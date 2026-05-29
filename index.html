@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="day" data-weather="sunny">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazenda Interativa 6.0 - Sustainable Metropolis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="weather-effects">
+        <div class="rain"></div>
+        <div class="fog"></div>
+        <div class="sun-glare"></div>
+    </div>
+
+    <canvas id="particle-canvas"></canvas>
+    
+    <div class="bio-feedback-panel">
+        <div class="bio-header">PULSO DA TERRA</div>
+        <div class="bio-stat">
+            <label>ATIVIDADE BIOLÓGICA</label>
+            <div class="wave-container">
+                <div class="wave"></div>
+            </div>
+        </div>
+        <div class="bio-stat">
+            <label>REGENERAÇÃO DE CO2</label>
+            <div class="bar-container">
+                <div class="bar-fill" id="co2-fill" style="width: 78%"></div>
+            </div>
+        </div>
+        <div class="bio-stat">
+            <label>FLUXO HÍDRICO</label>
+            <div class="data-stream" id="water-stream">01011010...</div>
+        </div>
+    </div>
+
+    <div class="weather-control">
+        <button class="w-btn active" data-w="sunny">☀️ SOL</button>
+        <button class="w-btn" data-w="rainy">🌧️ CHUVA</button>
+        <button class="w-btn" data-w="storm">⚡ TEMPESTADE</button>
+    </div>
+
+    <div id="loader-wrapper">
+        <div class="eco-loader">
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+            <div class="leaf"></div>
+        </div>
+        <div class="loading-text">Iniciando Bio-Sincronização 6.0...</div>
+    </div>
+
+    <div class="news-ticker">
+        <div class="ticker-wrap">
+            <div class="ticker-item">🌱 IA detecta aumento de 15% na regeneração do solo...</div>
+            <div class="ticker-item">🛸 Enxame de drones polinizadores atinge meta global...</div>
+            <div class="ticker-item">💧 Nova tecnologia de dessalinização solar implementada...</div>
+            <div class="ticker-item">🌍 Pegada de carbono da fazenda atinge nível negativo...</div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+
+    <header>
+        <nav>
+            <div class="logo">ECO<span>SYSTEM</span> 6.0</div>
+            <ul class="nav-links">
+                <li><a href="#home">Biosfera</a></li>
+                <li><a href="#mapa">Comando</a></li>
+                <li><a href="#ia-simulator">IA Bot</a></li>
+                <li><a href="#game">Desafio</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="eco-badge">SISTEMA VIVO</div>
+                <h1 class="text-reveal">O Futuro é <span id="typewriter"></span><span class="cursor">|</span></h1>
+                <p>A primeira metrópole agro-sustentável autônoma do mundo.</p>
+                <div class="hero-btns">
+                    <a href="#mapa" class="btn-hyper">Entrar no Ecossistema</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="mapa" class="map-section">
+            <div class="map-container-4d">
+                <div class="map-layers">
+                    <img src="mapa.png" alt="Base" class="map-layer base day-img">
+                    <img src="mapa_noite.png" alt="Noite" class="map-layer base night-img">
+                    <img src="mapa_chuva.png" alt="Chuva" class="map-layer base rain-img">
+                    
+                    <div class="hotspot-4d" data-tech="trator">
+                        <div class="pulse-ring"></div>
+                        <div class="core"></div>
+                    </div>
+                    <div class="hotspot-4d" data-tech="drone">
+                        <div class="pulse-ring"></div>
+                        <div class="core"></div>
+                    </div>
+                    <div class="hotspot-4d" data-tech="represa">
+                        <div class="pulse-ring"></div>
+                        <div class="core"></div>
+                    </div>
+                    <div class="hotspot-4d" data-tech="paineis">
+                        <div class="pulse-ring"></div>
+                        <div class="core"></div>
+                    </div>
+                    <div class="hotspot-4d" data-tech="estufa">
+                        <div class="pulse-ring"></div>
+                        <div class="core"></div>
+                    </div>
+                    <div class="hotspot-4d" data-tech="celeiro">
+                        <div class="pulse-ring"></div>
+                        <div class="core"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ia-simulator" class="ia-section">
+            <div class="hyper-glass-card terminal-card">
+                <h2>Terminal de IA Diagnóstica</h2>
+                <p>Simulador: Analise a saúde da sua plantação em tempo real utilizando nossa rede neural.</p>
+                <div class="ia-interface">
+                    <select id="ia-symptom" class="cyber-input">
+                        <option value="">Selecione um sintoma detectado pelos drones...</option>
+                        <option value="praga">Folhas com furos e manchas escuras (Praga)</option>
+                        <option value="agua">Solo rachado e plantas murchas (Seca)</option>
+                        <option value="nutriente">Crescimento lento e folhas amareladas (Desnutrição)</option>
+                    </select>
+                    <button id="btn-analyze" class="btn-hyper" style="margin-top: 1rem;">INICIAR DIAGNÓSTICO</button>
+                    
+                    <div class="ia-output-box">
+                        <div class="ia-header">Terminal de Resposta | Status: <span class="online" id="ia-status-text">Aguardando...</span></div>
+                        <div id="ia-typing-text">Aguardando entrada de dados do usuário...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="game" class="game-section">
+            <div class="hyper-glass-card">
+                <h2>Desafio de Sustentabilidade</h2>
+                <p>Proteja a fazenda de eventos climáticos extremos usando as tecnologias certas!</p>
+                <div id="game-container">
+                    <div id="game-status">Aguardando Início...</div>
+                    <div id="game-event-box">
+                        <div id="game-event-title">EVENTO</div>
+                        <div id="game-event-desc">Inicie o desafio para testar suas habilidades.</div>
+                    </div>
+                   <div class="game-actions">
+                        <button class="btn-game" data-action="drone">DRONES</button>
+                        <button class="btn-game" data-action="represa">SISTEMA HÍDRICO</button>
+                        <button class="btn-game" data-action="paineis">REDE SOLAR</button>
+                        <button class="btn-game" data-action="trator">BIO-TRATORES</button>
+                    </div>
+                    <div id="game-score">Pontuação: 0</div>
+                    <button id="start-game" class="btn-hyper">INICIAR DESAFIO</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="impact-section">
+            <div class="hyper-glass-card">
+                <h2>Simulador de Impacto Global</h2>
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <div class="counter" id="carbon-counter">0</div>
+                        <label>TONELADAS DE CO2 EVITADAS</label>
+                    </div>
+                    <div class="impact-item">
+                        <div class="counter" id="water-counter">0</div>
+                        <label>LITROS DE ÁGUA POUPADOS</label>
+                    </div>
+                    <div class="impact-item">
+                        <div class="counter" id="energy-counter">0</div>
+                        <label>MWh DE ENERGIA LIMPA</label>
+                    </div>
+                </div>
+                <div class="impact-visual">
+                    <div class="earth-glow"></div>
+                    <p>Sua gestão está ajudando a resfriar o planeta em 0.00001°C por segundo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="controle" class="control-section">
+            <div class="control-grid">
+                <div class="control-card">
+                    <h3>STATUS DO SISTEMA</h3>
+                    <div class="status-list">
+                        <div class="status-item"><span>ENERGIA</span> <span class="val">ESTÁVEL</span></div>
+                        <div class="status-item"><span>BIODIVERSIDADE</span> <span class="val">EM ALTA</span></div>
+                        <div class="status-item"><span>RECURSOS</span> <span class="val">OTIMIZADOS</span></div>
+                    </div>
+                </div>
+                <div id="certificate-card" class="control-card certificate-locked">
+                    <h3>CERTIFICADO AMBIENTAL</h3>
+                    <div class="cert-content">
+                        <div class="cert-seal">🏆</div>
+                        <p>Explore todos os módulos para desbloquear seu selo de Gestor Ambiental.</p>
+                        <button id="btn-cert" class="btn-cyber" disabled>BAIXAR SELO</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="agro-bot-terminal" class="terminal-hidden">
+        <div class="terminal-header">
+            <span>AGRO-BOT 2.0 - COMMAND CENTER</span>
+            <button id="close-terminal">_</button>
+        </div>
+        <div id="terminal-output"></div>
+        <div class="terminal-input-line">
+            <span>></span>
+            <input type="text" id="terminal-input" placeholder="Digite um comando (ex: help)..." autocomplete="off">
+        </div>
+    </div>
+    <button id="open-terminal-btn">🤖</button>
+
+    <div id="modal" class="modal">
+        <div class="hyper-modal-content">
+            <span class="close" id="close-tech">&times;</span>
+            <div class="modal-grid">
+                <div class="modal-visual">
+                    <div id="modal-icon" class="large-icon"></div>
+                </div>
+                <div class="modal-info">
+                    <h3 id="modal-title">SISTEMA</h3>
+                    <div id="modal-body" class="description"></div>
+                    <div class="tech-stats">
+                        <div class="t-stat">EFICIÊNCIA: <span>98%</span></div>
+                        <div class="t-stat">STATUS: <span class="online">ONLINE</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="about-tab" class="side-tab">ℹ️ SOBRE O PROJETO</button>
+
+    <div id="about-modal" class="modal">
+        <div class="hyper-modal-content about-content">
+            <span class="close" id="close-about">&times;</span>
+            <div class="modal-info">
+                <h2 style="color: var(--primary); margin-bottom: 1rem; font-family: var(--font-heading);">O PROPÓSITO 🌍</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">
+                    <strong>Objetivo do Site:</strong> Apresentar uma visão de futuro onde o agronegócio e o meio ambiente coexistem em perfeita harmonia. Através da tecnologia e da Inteligência Artificial, demonstramos como é possível maximizar a produção agrícola enquanto regeneramos o planeta, criando um ciclo sustentável.
+                </p>
+                
+                <div class="pros-cons-grid">
+                    <div class="pros">
+                        <h3 style="color: #00ffa3;">✅ Pontos Positivos</h3>
+                        <ul>
+                            <li><strong>Sustentabilidade:</strong> Otimização extrema no uso de água e energia.</li>
+                            <li><strong>Produtividade:</strong> Maior rendimento por hectare com monitoramento via IA.</li>
+                            <li><strong>Regeneração Ambiental:</strong> Uso de drones e sensores para proteger a biodiversidade.</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h3 style="color: #ff4757;">⚠️ Desafios e Alertas</h3>
+                        <ul>
+                            <li><strong>Custo de Implementação:</strong> Alta barreira financeira inicial para pequenos produtores.</li>
+                            <li><strong>Dependência Tecnológica:</strong> Vulnerabilidade a falhas de sistema e falta de internet no campo.</li>
+                            <li><strong>Capacitação:</strong> Necessidade de mão de obra altamente especializada.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
